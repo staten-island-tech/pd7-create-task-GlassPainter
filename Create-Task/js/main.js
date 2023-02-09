@@ -8,9 +8,23 @@
 // If not, delete original div, then keep going until correct
 
 import { colorArray } from "./array";
-let entries = Object.entries(colorArray);
-document.getElementById("testing").style.backgroundColor = `${
-  entries[Math.floor(Math.random() * entries.length)][1]
-}`;
+import { newArray } from "./array";
 
-console.log(entries[Math.floor(Math.random() * entries.length)]);
+let entries = Object.entries(colorArray);
+// document.getElementById("testing").style.backgroundColor = `${random}`;
+function test() {
+  for (let i = 0; i < 4; i++) {
+    let random = entries[Math.floor(Math.random() * entries.length)];
+    let newId = `testing${[i]}`;
+    document
+      .getElementById("testing")
+      .insertAdjacentHTML(
+        "beforeend",
+        `<div class="type" id="${newId}"></div>`
+      );
+    document.getElementById(newId).style.backgroundColor = `${random[1]}`;
+    // newArray.push(`${random[1]}`);
+  }
+}
+
+test();

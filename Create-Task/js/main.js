@@ -11,11 +11,13 @@ import { colorArray } from "./array";
 import { newArray } from "./array";
 
 let entries = Object.entries(colorArray);
-// document.getElementById("testing").style.backgroundColor = `${random}`;
 function test() {
   for (let i = 0; i < 4; i++) {
     let random = entries[Math.floor(Math.random() * entries.length)];
     let newId = `testing${[i]}`;
+    while (newArray.includes(random[0])) {
+      i = i - 1;
+    }
     document
       .getElementById("testing")
       .insertAdjacentHTML(
@@ -23,7 +25,7 @@ function test() {
         `<div class="type" id="${newId}"></div>`
       );
     document.getElementById(newId).style.backgroundColor = `${random[1]}`;
-    // newArray.push(`${random[1]}`);
+    newArray.push(`${random[0]}`);
   }
 }
 

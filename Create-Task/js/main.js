@@ -31,7 +31,7 @@ let newArray = [];
 
 let entries = Object.entries(colorArray);
 
-function test() {
+function generate() {
   for (let i = 0; i < 4; i++) {
     let random = entries[Math.floor(Math.random() * entries.length)];
     let newId = `option${i}`;
@@ -40,7 +40,7 @@ function test() {
       console.log("No good");
     } else {
       document
-        .getElementById("testing")
+        .getElementById("colorArea")
         .insertAdjacentHTML(
           "beforeend",
           `<div class="type" id="${newId}"></div>`
@@ -48,18 +48,36 @@ function test() {
       document.getElementById(newId).style.backgroundColor = `${random[1]}`;
       newArray.push(`${random[0]}`);
     }
-    document.getElementById("name").textContent = random[0];
   }
+
+  let chosenColor = (document.getElementById("name").textContent =
+    newArray[Math.floor(Math.random() * newArray.length)]);
+  document.getElementById("name").textContent = chosenColor;
+
+  function check(number) {
+    let modified = `option${number}`;
+    document.getElementById(modified).addEventListener("click", function () {
+      if (newArray[number] == chosenColor) {
+        console.log("Correct");
+      } else {
+        console.log("Incorrect");
+      }
+    });
+  }
+  Object.keys(newArray).forEach((element) => check(element));
 }
 
-test();
+generate();
 
-document.getElementById("option0").addEventListener("click", function () {
-  console.log("Hi");
+document.getElementById("restart").addEventListener("click", function () {
+  document.getElementById("name").textContent = "";
+  document.getElementById("colorArea").textContent = "";
+  newArray = [];
+  generate();
 });
 
-let startTime = performance.now();
+// let startTime = performance.now();
 
-let endTime = performance.now();
+// let endTime = performance.now();
 
-console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);
+// console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);

@@ -1,16 +1,17 @@
+#displayedColorName, #resultArea, body {
+    padding: auto;
+    text-align: center;
+    margin: 2rem auto;
+}
+
 .type {
     height: 10rem;
     width: 10rem;
-    margin: auto;
+    margin: 2rem auto;
 }
 
 #colorArea {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-#name {
-    text-align: center;
-    margin: 2rem auto;
 }

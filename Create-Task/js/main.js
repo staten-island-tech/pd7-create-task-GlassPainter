@@ -1,11 +1,11 @@
 // Create a Color Guessing Game
-// Create a large array for colors
-// Add subarray for color name and color code to add for backgrounds
-// Select a random color
-// Multiple divs with buttons for selection
-// Click on button
-// If the color name of the div selected is correct, end game
-// If not, delete original div, then keep going until correct
+// (DONE) Create a large array for colors
+// (DONE) Add subarray for color name and color code to add for backgrounds
+// (DONE) Select a random color
+// (DONE) Multiple divs with buttons for selection
+// (DONE) Click on button
+// (DONE) If the color name of the div selected is correct, end game
+// (DONE) If not, delete original div, then keep going until correct
 
 const colorArray = {
   Blue: "#0000FF",
@@ -29,55 +29,66 @@ const colorArray = {
 
 let newArray = [];
 
+const DOM = {
+  numberInput: document.getElementById("numberInput"),
+  colorArea: document.getElementById("colorArea"),
+  displayedColorName: document.getElementById("displayedColorName"),
+  resultArea: document.getElementById("resultArea"),
+  restartButton: document.getElementById("restartButton"),
+};
+
 let entries = Object.entries(colorArray);
 
-function generate() {
-  for (let i = 0; i < 4; i++) {
+function generate(numberInput, colorArea, displayedColorName, resultArea) {
+  for (let i = 0; i < numberInput; i++) {
     let random = entries[Math.floor(Math.random() * entries.length)];
     let newId = `option${i}`;
     if (newArray.includes(random[0])) {
       i -= 1;
       console.log("No good");
     } else {
-      document
-        .getElementById("colorArea")
-        .insertAdjacentHTML(
-          "beforeend",
-          `<div class="type" id="${newId}"></div>`
-        );
+      colorArea.insertAdjacentHTML(
+        "beforeend",
+        `<div class="type" id="${newId}"></div>`
+      );
       document.getElementById(newId).style.backgroundColor = `${random[1]}`;
       newArray.push(`${random[0]}`);
     }
   }
 
-  let chosenColor = (document.getElementById("name").textContent =
+  let chosenColor = (displayedColorName.textContent =
     newArray[Math.floor(Math.random() * newArray.length)]);
-  document.getElementById("name").textContent = chosenColor;
+  displayedColorName.textContent = chosenColor;
 
   function check(number) {
     let modified = `option${number}`;
     document.getElementById(modified).addEventListener("click", function () {
       if (newArray[number] == chosenColor) {
-        console.log("Correct");
+        resultArea.textContent = "Correct";
       } else {
-        console.log("Incorrect");
+        resultArea.textContent = "Incorrect";
+        this.remove();
       }
     });
   }
   Object.keys(newArray).forEach((element) => check(element));
 }
 
-generate();
+generate(
+  DOM.numberInput.value,
+  DOM.colorArea,
+  DOM.displayedColorName,
+  DOM.resultArea
+);
 
-document.getElementById("restart").addEventListener("click", function () {
-  document.getElementById("name").textContent = "";
-  document.getElementById("colorArea").textContent = "";
+DOM.restartButton.addEventListener("click", function () {
+  DOM.displayedColorName.textContent = "";
+  DOM.colorArea.textContent = "";
   newArray = [];
-  generate();
+  generate(
+    DOM.numberInput.value,
+    DOM.colorArea,
+    DOM.displayedColorName,
+    DOM.resultArea
+  );
 });
-
-// let startTime = performance.now();
-
-// let endTime = performance.now();
-
-// console.log(`Call to doSomething took ${endTime - startTime} milliseconds`);

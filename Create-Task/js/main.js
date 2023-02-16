@@ -1,12 +1,3 @@
-// Create a Color Guessing Game
-// (DONE) Create a large array for colors
-// (DONE) Add subarray for color name and color code to add for backgrounds
-// (DONE) Select a random color
-// (DONE) Multiple divs with buttons for selection
-// (DONE) Click on button
-// (DONE) If the color name of the div selected is correct, end game
-// (DONE) If not, delete original div, then keep going until correct
-
 const colorArray = {
   Blue: "#0000FF",
   Red: "#FF0000",
@@ -45,7 +36,6 @@ function generate(numberInput, colorArea, displayedColorName, resultArea) {
     let newId = `option${i}`;
     if (newArray.includes(random[0])) {
       i -= 1;
-      console.log("No good");
     } else {
       colorArea.insertAdjacentHTML(
         "beforeend",
@@ -65,6 +55,16 @@ function generate(numberInput, colorArea, displayedColorName, resultArea) {
     document.getElementById(modified).addEventListener("click", function () {
       if (newArray[number] == chosenColor) {
         resultArea.textContent = "Correct";
+        newArray.forEach(function (element) {
+          if (element != chosenColor) {
+            console.log(element);
+          }
+          // while (element != chosenColor) {
+          //   newArray.splice(Object.keys(element), 1);
+          //   console.log(newArray);
+          //   break;
+          // }
+        });
       } else {
         resultArea.textContent = "Incorrect";
         this.remove();

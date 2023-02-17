@@ -50,28 +50,31 @@ function generate(numberInput, colorArea, displayedColorName, resultArea) {
     newArray[Math.floor(Math.random() * newArray.length)]);
   displayedColorName.textContent = chosenColor;
 
-  function check(number) {
-    let modified = `option${number}`;
+  function check(key) {
+    let modified = `option${key}`;
     document.getElementById(modified).addEventListener("click", function () {
-      if (newArray[number] == chosenColor) {
+      // console.log(newArray[key]);
+      // console.log(chosenColor);
+      if (newArray[key] == chosenColor) {
         resultArea.textContent = "Correct";
-        newArray.forEach(function (element) {
-          if (element != chosenColor) {
-            console.log(element);
-          }
-          // while (element != chosenColor) {
-          //   newArray.splice(Object.keys(element), 1);
-          //   console.log(newArray);
-          //   break;
-          // }
+        newArray.forEach(function (element, index) {
+          document.getElementById(modified).textContent = "e";
         });
+        // newArray.forEach(function (element, index) {
+        //   while (element != chosenColor) {
+        //     console.log(index);
+        //     let newlyModified = `option${index}`;
+        //     console.log(newlyModified);
+        //     document.getElementById(newlyModified).remove();
+        //   }
+        // });
       } else {
         resultArea.textContent = "Incorrect";
         this.remove();
       }
     });
   }
-  Object.keys(newArray).forEach((element) => check(element));
+  Object.keys(newArray).forEach((key) => check(key));
 }
 
 generate(

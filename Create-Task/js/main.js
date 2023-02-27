@@ -25,24 +25,30 @@ const DOM = {
   colorArea: document.getElementById("colorArea"),
   displayedColorName: document.getElementById("displayedColorName"),
   resultArea: document.getElementById("resultArea"),
-  restartButton: document.getElementById("restartButton"),
+  startButton: document.getElementById("startButton"),
 };
 
 let entries = Object.entries(colorArray);
 
 function generate(numberInput, colorArea, displayedColorName, resultArea) {
-  for (let i = 0; i < numberInput; i++) {
-    let random = entries[Math.floor(Math.random() * entries.length)];
-    let newId = `option${i}`;
-    if (newArray.includes(random[0])) {
-      i -= 1;
-    } else {
-      colorArea.insertAdjacentHTML(
-        "beforeend",
-        `<div class="type" id="${newId}"></div>`
-      );
-      document.getElementById(newId).style.backgroundColor = `${random[1]}`;
-      newArray.push(`${random[0]}`);
+  if (isNaN(numberInput)) {
+    alert("Input is not a number");
+  } else if (numberInput > entries.length) {
+    alert("Number exceeds limit");
+  } else {
+    for (let i = 0; i < numberInput; i++) {
+      let random = entries[Math.floor(Math.random() * entries.length)];
+      let newId = `option${i}`;
+      if (newArray.includes(random[0])) {
+        i -= 1;
+      } else {
+        colorArea.insertAdjacentHTML(
+          "beforeend",
+          `<div class="type" id="${newId}"></div>`
+        );
+        document.getElementById(newId).style.backgroundColor = `${random[1]}`;
+        newArray.push(`${random[0]}`);
+      }
     }
   }
 
@@ -53,21 +59,8 @@ function generate(numberInput, colorArea, displayedColorName, resultArea) {
   function check(key) {
     let modified = `option${key}`;
     document.getElementById(modified).addEventListener("click", function () {
-      // console.log(newArray[key]);
-      // console.log(chosenColor);
       if (newArray[key] == chosenColor) {
         resultArea.textContent = "Correct";
-        newArray.forEach(function (element, index) {
-          document.getElementById(modified).textContent = "e";
-        });
-        // newArray.forEach(function (element, index) {
-        //   while (element != chosenColor) {
-        //     console.log(index);
-        //     let newlyModified = `option${index}`;
-        //     console.log(newlyModified);
-        //     document.getElementById(newlyModified).remove();
-        //   }
-        // });
       } else {
         resultArea.textContent = "Incorrect";
         this.remove();
@@ -84,7 +77,7 @@ generate(
   DOM.resultArea
 );
 
-DOM.restartButton.addEventListener("click", function () {
+DOM.startButton.addEventListener("click", function () {
   DOM.displayedColorName.textContent = "";
   DOM.colorArea.textContent = "";
   newArray = [];
@@ -94,4 +87,5 @@ DOM.restartButton.addEventListener("click", function () {
     DOM.displayedColorName,
     DOM.resultArea
   );
+  DOM.numberInput.value = "";
 });

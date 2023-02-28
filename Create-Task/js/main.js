@@ -20,6 +20,8 @@ const colorArray = {
 
 let newArray = [];
 
+let colorArrayEntries = Object.entries(colorArray);
+
 const DOM = {
   numberInput: document.getElementById("numberInput"),
   colorArea: document.getElementById("colorArea"),
@@ -28,16 +30,15 @@ const DOM = {
   startButton: document.getElementById("startButton"),
 };
 
-let entries = Object.entries(colorArray);
-
 function generate(numberInput, colorArea, displayedColorName, resultArea) {
   if (isNaN(numberInput)) {
     alert("Input is not a number");
-  } else if (numberInput > entries.length) {
+  } else if (numberInput > colorArrayEntries.length) {
     alert("Number exceeds limit");
   } else {
     for (let i = 0; i < numberInput; i++) {
-      let random = entries[Math.floor(Math.random() * entries.length)];
+      let random =
+        colorArrayEntries[Math.floor(Math.random() * colorArrayEntries.length)];
       let newId = `option${i}`;
       if (newArray.includes(random[0])) {
         i -= 1;

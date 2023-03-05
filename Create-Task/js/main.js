@@ -23,27 +23,33 @@ let newArray = [];
 let colorArrayEntries = Object.entries(colorArray);
 
 const DOM = {
-  numberInput: document.getElementById("numberInput"),
-  colorArea: document.getElementById("colorArea"),
-  displayedColorName: document.getElementById("displayedColorName"),
-  resultArea: document.getElementById("resultArea"),
+  numberOfChildDivs: document.getElementById("numberOfChildDivs"),
+  parentDiv: document.getElementById("parentDiv"),
+  chosenColorDiv: document.getElementById("chosenColorDiv"),
+  statusDiv: document.getElementById("statusDiv"),
   startButton: document.getElementById("startButton"),
 };
 
-function generate(numberInput, colorArea, displayedColorName, resultArea) {
-  if (isNaN(numberInput)) {
-    alert("Input is not a number");
-  } else if (numberInput > colorArrayEntries.length) {
-    alert("Number exceeds limit");
+function addChildDivsWithColors(
+  numberOfChildDivs,
+  parentDiv,
+  chosenColorDiv,
+  statusDiv
+) {
+  if (
+    isNaN(numberOfChildDivs) ||
+    numberOfChildDivs > colorArrayEntries.length
+  ) {
+    alert("Invalid input");
   } else {
-    for (let i = 0; i < numberInput; i++) {
+    for (let i = 0; i < numberOfChildDivs; i++) {
       let random =
         colorArrayEntries[Math.floor(Math.random() * colorArrayEntries.length)];
       let newId = `option${i}`;
       if (newArray.includes(random[0])) {
         i -= 1;
       } else {
-        colorArea.insertAdjacentHTML(
+        parentDiv.insertAdjacentHTML(
           "beforeend",
           `<div class="type" id="${newId}"></div>`
         );
@@ -53,17 +59,17 @@ function generate(numberInput, colorArea, displayedColorName, resultArea) {
     }
   }
 
-  let chosenColor = (displayedColorName.textContent =
+  let chosenColor = (chosenColorDiv.textContent =
     newArray[Math.floor(Math.random() * newArray.length)]);
-  displayedColorName.textContent = chosenColor;
+  chosenColorDiv.textContent = chosenColor;
 
   function check(key) {
     let modified = `option${key}`;
     document.getElementById(modified).addEventListener("click", function () {
       if (newArray[key] == chosenColor) {
-        resultArea.textContent = "Correct";
+        statusDiv.textContent = "Status: Correct";
       } else {
-        resultArea.textContent = "Incorrect";
+        statusDiv.textContent = "Status: Incorrect";
         this.remove();
       }
     });
@@ -71,22 +77,23 @@ function generate(numberInput, colorArea, displayedColorName, resultArea) {
   Object.keys(newArray).forEach((key) => check(key));
 }
 
-generate(
-  DOM.numberInput.value,
-  DOM.colorArea,
-  DOM.displayedColorName,
-  DOM.resultArea
+addChildDivsWithColors(
+  DOM.numberOfChildDivs.value,
+  DOM.parentDiv,
+  DOM.chosenColorDiv,
+  DOM.statusDiv
 );
 
 DOM.startButton.addEventListener("click", function () {
-  DOM.displayedColorName.textContent = "";
-  DOM.colorArea.textContent = "";
+  DOM.chosenColorDiv.textContent = "";
+  DOM.parentDiv.textContent = "";
   newArray = [];
-  generate(
-    DOM.numberInput.value,
-    DOM.colorArea,
-    DOM.displayedColorName,
-    DOM.resultArea
+  addChildDivsWithColors(
+    DOM.numberOfChildDivs.value,
+    DOM.parentDiv,
+    DOM.chosenColorDiv,
+    DOM.statusDiv
   );
-  DOM.numberInput.value = "";
+  DOM.numberOfChildDivs.value = "";
+  DOM.statusDiv.textContent = "Status: ";
 });

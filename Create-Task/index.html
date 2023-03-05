@@ -4,14 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css">
-    <title>Vite App</title>
+    <title>Color Matching Game</title>
   </head>
   <body>
-    <input type="test" id="numberInput" placeholder="Number of Colors">
-    <div id="displayedColorName"></div>
-    <div id="colorArea"></div>
-    <div id="resultArea"></div>
+    <h1>Color Matching Game</h1>
+    <h3>Type in the desired number of colors.</h3>
+    <h3>Click on the "Start/Restart" button to begin.</h3>
+    <br>
+    <h3>Colors that are randomized will be displayed on the screen.</h3>
+    <h3>Try to match the color name displayed with the correct color.</h3>
+    <h3>The result is displayed in the "Status" area.</h3>
+    <input type="text" id="numberOfChildDivs" placeholder="Number of Colors">
     <button type="click" id="startButton">Start/Restart</button>
+    <h2 id="chosenColorDiv"></h2>
+    <div id="parentDiv"></div>
+    <h2 id="statusDiv">Status: </h2>
     <script type="module" src="/js/main.js"></script>
   </body>
 </html>

@@ -1,7 +1,11 @@
-#displayedColorName, #resultArea, body {
+#chosenColorDiv, #statusDiv, body {
     padding: auto;
     text-align: center;
     margin: 2rem auto;
+}
+
+h1 {
+    margin: 4rem 0rem;
 }
 
 .type {
@@ -10,8 +14,14 @@
     margin: 2rem auto;
 }
 
-#colorArea {
+#numberOfChildDivs {
+    margin-top: 2rem;
+}
+
+#parentDiv {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 60%;
+    margin: auto;
 }

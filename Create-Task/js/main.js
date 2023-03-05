@@ -45,10 +45,10 @@ function addChildDivsWithColors(
     for (let i = 0; i < numberOfChildDivs; i++) {
       let random =
         colorArrayEntries[Math.floor(Math.random() * colorArrayEntries.length)];
-      let newId = `option${i}`;
       if (newArray.includes(random[0])) {
         i -= 1;
       } else {
+        let newId = `option${i}`;
         parentDiv.insertAdjacentHTML(
           "beforeend",
           `<div class="type" id="${newId}"></div>`
@@ -76,13 +76,6 @@ function addChildDivsWithColors(
   }
   Object.keys(newArray).forEach((key) => check(key));
 }
-
-addChildDivsWithColors(
-  DOM.numberOfChildDivs.value,
-  DOM.parentDiv,
-  DOM.chosenColorDiv,
-  DOM.statusDiv
-);
 
 DOM.startButton.addEventListener("click", function () {
   DOM.chosenColorDiv.textContent = "";
